@@ -1,4 +1,4 @@
-import PokeCard from './Components/PokeCard'
+
 import SearchForm from './Components/SearchForm'
 
 const App = () => {

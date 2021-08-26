@@ -1,7 +1,7 @@
 import { useState} from "react"
 
-const REGIONS = [' ', 'Kanto', 'Johto', 'Hoenn', 'Sinoh', 'Teselia', 'Kalos', 'Alola', 'Galar']
-const TYPES = [' ','normal', 'water', 'grass', 'fire', 'ghost', 'dark', 'steel', 'bug', 'flying',
+const REGIONS = ['', 'Kanto', 'Johto', 'Hoenn', 'Sinoh', 'Teselia', 'Kalos', 'Alola', 'Galar']
+const TYPES = ['','normal', 'water', 'grass', 'fire', 'ghost', 'dark', 'steel', 'bug', 'flying',
 'rock', 'ground', 'physic', 'ice', 'fighting', 'electric', 'fairy', 'poison' ,'dragon']
 
 const SearchForm = () => {
@@ -10,9 +10,31 @@ const SearchForm = () => {
     const [type1, setType1] = useState(' ');
     const [type2, setType2] = useState(' ');
 
+    const getPokemonInformation = () => {
+        let pokemon ={
+            name: {name},
+            region: {region},
+            type1: {type1},
+            type2: {type2}
+        }
+
+        console.log(pokemon)
+    }
+
+    const clearForm = () => {
+        setName('')
+        setRegion('')
+        setType1('')
+        setType2('')
+    }
+
     return(
         <div className="px-6 border-2 rounded-lg border-black m-1 pt-6 bg-blue-500">
-            <form className="grid grid-flow-col grid-rows-2 gap-1 ">
+            <form className="grid grid-flow-col grid-rows-2 gap-1 "
+                onSubmit={(e) => {
+                    e.preventDefault();
+                  }}
+            >
                 <div className="flex flex-col mb-3 pl-2 py-0">
                 <label htmlFor="pokemon name" className="font-bold" >
                         Name: 
@@ -81,8 +103,19 @@ const SearchForm = () => {
                     </label>
                 </div>
                 <div className="row-span-2 flex flex-col justify-center">
-                   <button className="mb-4 mt-6 bg-gray-300 hover:bg-gray-400 rounded-md p-1">Search</button> 
-                   <button className="mt-4 mb-6 bg-gray-300 hover:bg-gray-400 rounded-md p-1">Clear</button>
+                   <button 
+                        className="mb-4 mt-6 bg-gray-300 hover:bg-gray-400 rounded-md p-1"
+                        onClick={getPokemonInformation}     
+                    >Search
+                    </button> 
+
+
+                   <button 
+                        className="mt-4 mb-6 bg-gray-300 hover:bg-gray-400 rounded-md p-1"
+                        onClick={clearForm}
+                   >
+                       Clear
+                    </button>
                 </div> 
 
             </form>
