@@ -12,6 +12,7 @@ const SearchForm = () => {
     const [type1, setType1] = useState('');
     const [type2, setType2] = useState('');
     const [pokemons, setPokemons] = useState([])
+    const [notFound, setNotFound] = useState(false);
 
     const clearForm = () => {
         setName('')
@@ -19,39 +20,43 @@ const SearchForm = () => {
         setType1('')
         setType2('')
         setPokemons([])
+        setNotFound(false)
     }
 
-
+    
     async function requestPokemonbyName(){
-        const res = await fetch(
-            `https://pokeapi.co/api/v2/pokemon/${name}`
-        );
+        try{
+            const res = await fetch(
+                `https://pokeapi.co/api/v2/pokemon/${name}`
+            );
 
-        const json = [];
-         json.push(await res.json());
-        
-
-        setPokemons(json)
+            const json = [];
+            json.push(await res.json());
+            
+            json[0].name = json[0].name.charAt(0).toUpperCase() + json[0].name.slice(1);
+            setPokemons(json)
+            setNotFound(false)
+        }catch(e){
+            setNotFound(true)
+        }
     }
-
-    console.log(pokemons)
 
     return(
         <div className="">
-            <form className="grid grid-flow-col grid-rows-2 gap-1 px-6 border-2 rounded-lg border-black m-1 pt-6 bg-blue-500 "
+            <form className="grid grid-flow-col grid-rows-2 gap-1 px-6 pb-2 rounded-lg m-3 pt-6 bg-white shadow-2xl "
                 onSubmit={(e) => {
                     e.preventDefault();
                     requestPokemonbyName();
                   }}
             >
-                <div className="flex flex-col mb-3 pl-2 py-0">
+                <div className="flex flex-col mb-3 pl-2 py-0 ">
                 <label htmlFor="pokemon name" className="font-bold" >
                         Name: 
                         <input
                             id="name"
                             value={name}
                             placeholder="Pokemon's Name"
-                            className="rounded-md pl-2"
+                            className="rounded-md pl-2 bg-gray-100"
                             onChange={(e)=> setName(e.target.value)}
                         />
                     </label>
@@ -61,7 +66,7 @@ const SearchForm = () => {
                         <select 
                             id="region"
                             value={region}
-                            className="ml-1.5 rounded-md"
+                            className="ml-1.5 rounded-md bg-gray-200"
                             onChange={(e) => setRegion(e.target.value)}
                         >
                             {REGIONS.map((region) => (
@@ -79,7 +84,7 @@ const SearchForm = () => {
                         <select 
                             id="type"
                             value={type1}
-                            className="ml-1 rounded-md"
+                            className="ml-1 rounded-md bg-gray-200"
                             onChange={(e) => setType1(e.target.value)}
                         >
                             {
@@ -97,7 +102,7 @@ const SearchForm = () => {
                             disabled={type1 === '' ? true : false}
                             id="type"
                             value={type2}
-                            className="ml-0.5 rounded-md"
+                            className="ml-0.5 rounded-md bg-gray-200"
                             onChange={(e) => setType2(e.target.value)}
                         >
                             {
@@ -128,7 +133,7 @@ const SearchForm = () => {
                 </div> 
             </form>
             <div>
-               <Results pokeResults={pokemons}/>
+               <Results pokeResults={pokemons} notFound={notFound}/>
             </div>
         </div>
     )

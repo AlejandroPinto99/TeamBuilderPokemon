@@ -1,3 +1,58 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.bug{
+    background-color: #3D9953;
+}
+.fire{
+    background-color: red;
+}
+.grass{
+    background-color: #2CCB56;
+}
+.flying{
+    background-color: #94B2C6;
+}
+.water{
+    background-color: #2551DE;
+}
+.electric{
+    background-color:#F4BD37;
+}
+.dark{
+    background-color: #5B5978;
+}
+.dragon{
+    background-color: #65CAD8;
+}
+.fighting{
+    background-color:#984029;
+}
+.ghost{
+    background-color: #90678F;
+}
+.fairy{
+    background-color:#E80C6A;
+}
+.steel{
+    background-color: #5F756D;
+}
+.ground{
+    background-color:#936A5B;
+}
+.rock{
+    background-color:#6A6A53;
+}
+.psychic{
+    background-color: #F61690;
+}
+.normal{
+    background-color:#C998A7;
+}
+.poison{
+    background-color:#9C68D6;
+}
+.ice{
+    background-color: #89D2F3;
+}

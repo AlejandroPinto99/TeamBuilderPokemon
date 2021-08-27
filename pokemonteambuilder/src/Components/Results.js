@@ -1,12 +1,34 @@
 import PokeCard from './PokeCard'
+import NotFound from './NotFound'
 
-const Results = ({pokeResults}) =>{
+const Results = ({pokeResults, notFound}) =>{
+
+
     return(
-        <div>
-            
+        <div className="py-1">  
             {
-                !pokeResults.length ? ( <p>No results</p> ) :
-                ( <img src={pokeResults[0].sprites.front_default} alt="pokemon"/> )  
+                notFound ? (
+                        <NotFound />
+                    ) :
+                !pokeResults.length ? ( 
+                     (
+                        <span> </span>
+                    )     
+                
+                ) :
+                (   
+                    pokeResults.map(pokemon => {
+                        return(
+                            <PokeCard
+                                name={pokemon.name}
+                                key={pokemon.name}
+                                id={pokemon.id}
+                                types={pokemon.types}
+                                sprite={pokemon.sprites.front_default}
+                           />
+                        );
+                    })
+                )  
             }
         </div>
     );
