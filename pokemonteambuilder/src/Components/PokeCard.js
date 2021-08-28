@@ -4,6 +4,8 @@ import '../index.css'
 const PokeCard = ({name, id, types, sprite}) => {
     let region = '';
 
+        console.log(name);
+
         if (id >= 1 && id < 152)
             region = 'Kanto';
             

@@ -2,8 +2,7 @@ import PokeCard from './PokeCard'
 import NotFound from './NotFound'
 
 const Results = ({pokeResults, notFound}) =>{
-
-
+        console.log(pokeResults)
     return(
         <div className="py-1">  
             {
